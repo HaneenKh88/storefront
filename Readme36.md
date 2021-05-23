@@ -1,9 +1,5 @@
 # todo
 
-#### Note:
-
-I work on the lab with a group.
-
 ### Deploy link on Netlify:
 
 [Netlify](https://haneen-store-front.netlify.app/)
