@@ -98,7 +98,7 @@ const Categories = (props) => {
                         className={classes.Category}
 						variant="contained"
 						>
-							{category.displayName}
+							{category.name}
 							
 						</Button>
                         
@@ -110,11 +110,11 @@ const Categories = (props) => {
 					{state.cartProducts.map((product) => (
                          <div  style={{backgroundColor:"black"}}>
 						<li key={product.id} className={classes.listSection}>
-							<ListItem key={product.id}>
+							<ListItem key={product._id}>
 								<ListItemText primary={product.name} />
 								<HighlightOffIcon
                                 className={classes.Delete}
-									onClick={() => handleRemove(product.id)}
+									onClick={() => handleRemove(product._id)}
 								/>
 							</ListItem>
 						</li>

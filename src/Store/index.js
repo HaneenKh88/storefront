@@ -1,13 +1,12 @@
-import products from './Products'
-import categories from './CategoriesStore'
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import categories from './CategoriesStore';
+import products from './Products';
 
-import {createStore, combineReducers} from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-let reducers = combineReducers({categories: categories,products: products});
+const reducers = combineReducers({ categories, products });
 
 const store = () => {
-    return createStore(reducers, composeWithDevTools())
-}
+	return createStore(reducers, applyMiddleware(thunk));
+};
 
 export default store();
