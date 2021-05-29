@@ -41,16 +41,18 @@ const SimpleCart = () => {
 						className={root}
 					>
                         <h2 style={{color:"white"}}>Orderd Items:</h2>
-						{state.cartProducts.map((product, i) => {
+						{state.cartProducts.map((product) => {
 							return (
 								<Grid
 									item
-									key={i}
+									key={product._id}
 									style={{ marginBottom: '1rem', color:"white"}}
 								>
                                    
 									Product: {product.name} <br></br>
-                                    Number: {product.inventoryCount} Items.
+                                    Number: {state.TotalInventoryCount} . <br></br>
+                                    Price: {product.price}$ .
+
                                     <br></br>
 								</Grid>
 							);

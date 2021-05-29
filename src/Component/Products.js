@@ -1,4 +1,4 @@
-import React from 'react';
+import {React, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -11,6 +11,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { increment, getCartProducts } from '../Store/Products';
 import { If, Else, Then } from 'react-if';
 import SimpleCart from './Cart';
+import { getRemoteData } from '../Store/Action';
+
 
 import {Grid} from '@material-ui/core';
 
@@ -45,12 +47,13 @@ const Products = () => {
 			cartProducts: state.products.cartProducts,
 			show: state.products.show,
 			active: state.categories.active,
-      description: state.products.products[0].description
+			categories: state.categories.categories,
+      
 		};
 	});
 
 	let activeProducts = state.products.filter(
-		(product) => product.categoryAssociation === state.active,
+		(product) => product.category  === state.active,
 	);
 
 	const dispatch = useDispatch(getCartProducts);
@@ -59,7 +62,11 @@ const Products = () => {
 		dispatch(increment(id));
 		dispatch(getCartProducts(id));
 	};
-console.log(state.description);
+
+	useEffect(() => {
+		dispatch(getRemoteData('https://api-js401.herokuapp.com/api/v1/products'));
+	}, [dispatch]);
+// console.log(state.description);
 	return (
 		<>
 			<If condition={!state.show}>
@@ -77,7 +84,7 @@ console.log(state.description);
 						<Grid container item wrap="wrap" xs={10} spacing={0}>
 							<Grid container justify="space-evenly" wrap="wrap" spacing={8}>
 								{activeProducts.map((product, i) => (
-									<Card key={i} className={classes.root}>
+									<Card key={product._id} className={classes.root}>
 										<CardActionArea>
 											<CardMedia
 												component="img"
@@ -104,8 +111,8 @@ console.log(state.description);
 													color="textSecondary"
 													component="p"
 												>
-                           {product.stock > 0
-                      ? `In stock: ${product.stock} Items.`
+                           {product.inStock > 0
+                      ? `In stock: ${product.inStock} Items.`
                       : 'Out of Stock'}
 												
 												</Typography>
@@ -118,8 +125,8 @@ console.log(state.description);
 											<Button
 												size="small"
 												color="primary"
-												onClick={() => handleClick(product.id)}
-                        disabled={product.stock > 0 ? false : true}
+												onClick={() => handleClick(product._id)}
+                        disabled={product.inStock > 0 ? false : true}
 											>
 												Add to Cart
 											</Button>

@@ -1,9 +1,9 @@
 const intialState = {
 	
       categories: [
-              { name: 'FOOD', displayName: 'Food', description: 'Choose your favorite food'},
-              { name: 'ELECTRONICS', displayName: 'Electronics', description: 'Choose your favorite electronics pices'},
-              { name: 'CLOTHES', displayName: 'Clothing', description: 'Choose your favorite clothes'},
+              { name: 'food', displayName: 'Food', description: 'Choose your favorite food'},
+              { name: 'electronics', displayName: 'Electronics', description: 'Choose your favorite electronics pices'},
+              { name: 'shirts', displayName: 'shirts', description: 'Choose your favorite clothes'},
             ],
 
 	active: '',
